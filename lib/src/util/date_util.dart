@@ -1,48 +1,62 @@
+import 'package:intl/intl.dart';
+
 class DateUtil {
+  static final _locale = Intl.getCurrentLocale();
+
+  static final _dateFormat = DateFormat('', _locale);
+
   static const int DAYS_IN_WEEK = 7;
 
-  static const List<String> MONTH_LABEL = [
-    '',
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+  static List<String> get MONTH_LABEL =>
+      [..._dateFormat.dateSymbols.MONTHS]..insert(0, '');
+  // [
+  //   '',
+  //   'January',
+  //   'February',
+  //   'March',
+  //   'April',
+  //   'May',
+  //   'June',
+  //   'July',
+  //   'August',
+  //   'September',
+  //   'October',
+  //   'November',
+  //   'December',
+  // ];
 
-  static const List<String> SHORT_MONTH_LABEL = [
-    '',
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
+  static final List<String> SHORT_MONTH_LABEL = [
+    ..._dateFormat.dateSymbols.SHORTMONTHS
+  ]..insert(0, '');
+  // [
+  //   '',
+  //   'Jan',
+  //   'Feb',
+  //   'Mar',
+  //   'Apr',
+  //   'May',
+  //   'Jun',
+  //   'Jul',
+  //   'Aug',
+  //   'Sep',
+  //   'Oct',
+  //   'Nov',
+  //   'Dec',
+  // ];
 
-  static const List<String> WEEK_LABEL = [
-    '',
-    'Sun',
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-  ];
+  static final List<String> WEEK_LABEL = [
+    ..._dateFormat.dateSymbols.SHORTWEEKDAYS
+  ]..insert(0, '');
+  // [
+  //   '',
+  //   'Sun',
+  //   'Mon',
+  //   'Tue',
+  //   'Wed',
+  //   'Thu',
+  //   'Fri',
+  //   'Sat',
+  // ];
 
   /// Get start day of month.
   static DateTime startDayOfMonth(final DateTime referenceDate) =>
