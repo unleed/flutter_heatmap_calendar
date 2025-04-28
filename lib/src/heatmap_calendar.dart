@@ -74,6 +74,11 @@ class HeatMapCalendar extends StatefulWidget {
   /// Default value is true.
   final bool? showColorTip;
 
+  /// Allow calendar to switch between months.
+  ///
+  /// Default value is true.
+  final bool allowSwitchMonth;
+
   /// Widgets which shown at left and right side of colorTip.
   ///
   /// First value is the left side widget and second value is the right side widget.
@@ -106,6 +111,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.onClick,
     this.onMonthChange,
     this.showColorTip = true,
+    this.allowSwitchMonth = true,
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
@@ -144,32 +150,35 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 14,
+        if (widget.allowSwitchMonth)
+          IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 14,
+            ),
+            onPressed: () => changeMonth(-1),
           ),
-          onPressed: () => changeMonth(-1),
-        ),
 
         // Text which shows the current year and month
-        Text(
-          DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
-              ' ' +
-              (_currentDate?.year).toString(),
-          style: TextStyle(
-            fontSize: widget.monthFontSize ?? 12,
+        Flexible(
+          child: Text(
+            DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
+                ' ' +
+                (_currentDate?.year).toString(),
+            maxLines: 1,
+            style: TextStyle(fontSize: widget.monthFontSize),
           ),
         ),
 
         // Next month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_forward_ios,
-            size: 14,
+        if (widget.allowSwitchMonth)
+          IconButton(
+            icon: const Icon(
+              Icons.arrow_forward_ios,
+              size: 14,
+            ),
+            onPressed: () => changeMonth(1),
           ),
-          onPressed: () => changeMonth(1),
-        ),
       ],
     );
   }
@@ -184,14 +193,17 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
             false,
             Container(
               margin: EdgeInsets.only(
-                  left: widget.margin?.left ?? 2,
-                  right: widget.margin?.right ?? 2),
-              width: widget.size ?? 42,
+                left: widget.margin?.left ?? 2,
+                right: widget.margin?.right ?? 2,
+              ),
+              // width: widget.size ?? 42,
+              constraints: BoxConstraints(maxWidth: widget.size ?? 42),
               alignment: Alignment.center,
               child: Text(
                 label,
+                maxLines: 1,
                 style: TextStyle(
-                  fontSize: widget.weekFontSize ?? 12,
+                  fontSize: widget.weekFontSize,
                   color: widget.weekTextColor ?? const Color(0xFF758EA1),
                 ),
               ),
