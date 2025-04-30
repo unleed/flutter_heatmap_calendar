@@ -7,8 +7,8 @@ class DateUtil {
 
   static const int DAYS_IN_WEEK = 7;
 
-  static List<String> get MONTH_LABEL =>
-      [..._dateFormat.dateSymbols.MONTHS]..insert(0, '');
+  static List<String> monthLabel({DateFormat? dateformat}) =>
+      [...(dateformat ?? _dateFormat).dateSymbols.MONTHS]..insert(0, '');
   // [
   //   '',
   //   'January',
@@ -25,9 +25,8 @@ class DateUtil {
   //   'December',
   // ];
 
-  static final List<String> SHORT_MONTH_LABEL = [
-    ..._dateFormat.dateSymbols.SHORTMONTHS
-  ]..insert(0, '');
+  static List<String> shortMonthLabel({DateFormat? dateformat}) =>
+      [...(dateformat ?? _dateFormat).dateSymbols.SHORTMONTHS]..insert(0, '');
   // [
   //   '',
   //   'Jan',
@@ -44,9 +43,8 @@ class DateUtil {
   //   'Dec',
   // ];
 
-  static final List<String> WEEK_LABEL = [
-    ..._dateFormat.dateSymbols.SHORTWEEKDAYS
-  ]..insert(0, '');
+  static List<String> weekLabel({DateFormat? dateformat}) =>
+      [...(dateformat ?? _dateFormat).dateSymbols.SHORTWEEKDAYS]..insert(0, '');
   // [
   //   '',
   //   'Sun',
