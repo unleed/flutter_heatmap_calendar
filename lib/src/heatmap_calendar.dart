@@ -203,7 +203,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
                 label,
                 maxLines: 1,
                 style: TextStyle(
-                  fontSize: widget.weekFontSize,
+                  // fontSize: widget.weekFontSize,
                   color: widget.weekTextColor ?? const Color(0xFF758EA1),
                 ),
               ),
