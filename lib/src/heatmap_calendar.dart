@@ -186,6 +186,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
     List<String> weekLabels = DateUtil.weekLabel;
     if (widget.onlyInitialWeekLabelLetter) {
       weekLabels = weekLabels
+          .skip(1)
           .map((label) => label.substring(0, 1).toUpperCase())
           .toList();
     }
@@ -193,7 +194,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        for (String label in weekLabels.skip(1))
+        for (String label in weekLabels)
           Flexible(
             child: Container(
               margin: EdgeInsets.only(
