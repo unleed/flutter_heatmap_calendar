@@ -148,11 +148,14 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
 
   /// Header widget which shows left, right buttons and year/month text.
   Widget _header() {
+    final btnStyle =
+        IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
         IconButton(
+          style: btnStyle,
           icon: const Icon(Icons.arrow_back_ios, size: 14),
           onPressed: widget.allowSwitchMonth ? () => changeMonth(-1) : null,
         ),
@@ -170,6 +173,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
 
         // Next month button.
         IconButton(
+          style: btnStyle,
           icon: const Icon(Icons.arrow_forward_ios, size: 14),
           onPressed: widget.allowSwitchMonth ? () => changeMonth(1) : null,
         ),
