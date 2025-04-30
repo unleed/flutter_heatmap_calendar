@@ -152,14 +152,10 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         // Previous month button.
-        if (widget.allowSwitchMonth)
-          IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              size: 14,
-            ),
-            onPressed: () => changeMonth(-1),
-          ),
+        IconButton(
+          icon: const Icon(Icons.arrow_back_ios, size: 14),
+          onPressed: widget.allowSwitchMonth ? () => changeMonth(-1) : null,
+        ),
 
         // Text which shows the current year and month
         Flexible(
@@ -173,11 +169,10 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         ),
 
         // Next month button.
-        if (widget.allowSwitchMonth)
-          IconButton(
-            icon: const Icon(Icons.arrow_forward_ios, size: 14),
-            onPressed: () => changeMonth(1),
-          ),
+        IconButton(
+          icon: const Icon(Icons.arrow_forward_ios, size: 14),
+          onPressed: widget.allowSwitchMonth ? () => changeMonth(1) : null,
+        ),
       ],
     );
   }
