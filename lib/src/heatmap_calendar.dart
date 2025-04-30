@@ -189,7 +189,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       children: <Widget>[
         for (String label in DateUtil.WEEK_LABEL.skip(1))
           WidgetUtil.flexibleContainer(
-            widget.flexible ?? false,
+            widget.flexible ?? true,
             false,
             Container(
               margin: EdgeInsets.only(
@@ -203,7 +203,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
                 label,
                 maxLines: 1,
                 style: TextStyle(
-                  // fontSize: widget.weekFontSize,
+                  fontSize: widget.weekFontSize,
                   color: widget.weekTextColor ?? const Color(0xFF758EA1),
                 ),
               ),
