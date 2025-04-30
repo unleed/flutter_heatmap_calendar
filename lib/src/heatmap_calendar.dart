@@ -3,7 +3,6 @@ import './data/heatmap_color_mode.dart';
 import './widget/heatmap_calendar_page.dart';
 import './widget/heatmap_color_tip.dart';
 import './util/date_util.dart';
-import './util/widget_util.dart';
 
 class HeatMapCalendar extends StatefulWidget {
   /// The datasets which fill blocks based on its value.
@@ -45,7 +44,7 @@ class HeatMapCalendar extends StatefulWidget {
   /// Make block size flexible if value is true.
   ///
   /// Default value is false.
-  final bool? flexible;
+  final bool flexible;
 
   /// The margin value for every block.
   final EdgeInsets? margin;
@@ -72,7 +71,7 @@ class HeatMapCalendar extends StatefulWidget {
   /// Show color tip which represents the color range at the below.
   ///
   /// Default value is true.
-  final bool? showColorTip;
+  final bool showColorTip;
 
   /// Allow calendar to switch between months.
   ///
@@ -173,10 +172,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         // Next month button.
         if (widget.allowSwitchMonth)
           IconButton(
-            icon: const Icon(
-              Icons.arrow_forward_ios,
-              size: 14,
-            ),
+            icon: const Icon(Icons.arrow_forward_ios, size: 14),
             onPressed: () => changeMonth(1),
           ),
       ],
@@ -188,15 +184,12 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         for (String label in DateUtil.WEEK_LABEL.skip(1))
-          WidgetUtil.flexibleContainer(
-            widget.flexible ?? true,
-            false,
-            Container(
+          Flexible(
+            child: Container(
               margin: EdgeInsets.only(
                 left: widget.margin?.left ?? 2,
                 right: widget.margin?.right ?? 2,
               ),
-              // width: widget.size ?? 42,
               constraints: BoxConstraints(maxWidth: widget.size ?? 42),
               alignment: Alignment.center,
               child: Text(
@@ -217,7 +210,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
   Widget _intrinsicWidth({
     required Widget child,
   }) =>
-      (widget.flexible ?? false) ? child : IntrinsicWidth(child: child);
+      (widget.flexible) ? child : IntrinsicWidth(child: child);
 
   @override
   Widget build(BuildContext context) {
