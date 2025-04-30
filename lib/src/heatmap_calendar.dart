@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import './data/heatmap_color_mode.dart';
 import './widget/heatmap_calendar_page.dart';
 import './widget/heatmap_color_tip.dart';
@@ -92,7 +91,7 @@ class HeatMapCalendar extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double? colorTipSize;
 
-  final DateFormat? weekLabelFormat;
+  final bool onlyInitialWeekLabelLetter;
 
   const HeatMapCalendar({
     Key? key,
@@ -117,7 +116,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
-    this.weekLabelFormat,
+    this.onlyInitialWeekLabelLetter = false,
   }) : super(key: key);
 
   @override
@@ -165,7 +164,7 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
         // Text which shows the current year and month
         Flexible(
           child: Text(
-            DateUtil.monthLabel()[_currentDate?.month ?? 0] +
+            DateUtil.monthLabel[_currentDate?.month ?? 0] +
                 ' ' +
                 (_currentDate?.year).toString(),
             maxLines: 1,
@@ -184,11 +183,17 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
   }
 
   Widget _weekLabel() {
+    List<String> weekLabels = DateUtil.weekLabel;
+    if (widget.onlyInitialWeekLabelLetter) {
+      weekLabels = weekLabels
+          .map((label) => label.substring(0, 1).toUpperCase())
+          .toList();
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        for (String label
-            in DateUtil.weekLabel(dateformat: widget.weekLabelFormat).skip(1))
+        for (String label in weekLabels.skip(1))
           Flexible(
             child: Container(
               margin: EdgeInsets.only(

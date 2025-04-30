@@ -7,54 +7,14 @@ class DateUtil {
 
   static const int DAYS_IN_WEEK = 7;
 
-  static List<String> monthLabel({DateFormat? dateformat}) =>
-      [...(dateformat ?? _dateFormat).dateSymbols.MONTHS]..insert(0, '');
-  // [
-  //   '',
-  //   'January',
-  //   'February',
-  //   'March',
-  //   'April',
-  //   'May',
-  //   'June',
-  //   'July',
-  //   'August',
-  //   'September',
-  //   'October',
-  //   'November',
-  //   'December',
-  // ];
+  static List<String> get monthLabel =>
+      [..._dateFormat.dateSymbols.MONTHS]..insert(0, '');
 
-  static List<String> shortMonthLabel({DateFormat? dateformat}) =>
-      [...(dateformat ?? _dateFormat).dateSymbols.SHORTMONTHS]..insert(0, '');
-  // [
-  //   '',
-  //   'Jan',
-  //   'Feb',
-  //   'Mar',
-  //   'Apr',
-  //   'May',
-  //   'Jun',
-  //   'Jul',
-  //   'Aug',
-  //   'Sep',
-  //   'Oct',
-  //   'Nov',
-  //   'Dec',
-  // ];
+  static List<String> get shortMonthLabel =>
+      [..._dateFormat.dateSymbols.SHORTMONTHS]..insert(0, '');
 
-  static List<String> weekLabel({DateFormat? dateformat}) =>
-      [...(dateformat ?? _dateFormat).dateSymbols.SHORTWEEKDAYS]..insert(0, '');
-  // [
-  //   '',
-  //   'Sun',
-  //   'Mon',
-  //   'Tue',
-  //   'Wed',
-  //   'Thu',
-  //   'Fri',
-  //   'Sat',
-  // ];
+  static List<String> get weekLabel =>
+      [..._dateFormat.dateSymbols.SHORTWEEKDAYS]..insert(0, '');
 
   /// Get start day of month.
   static DateTime startDayOfMonth(final DateTime referenceDate) =>
